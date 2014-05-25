@@ -12,14 +12,23 @@ $exten = 1;
 $pilotdepth = $exten - .25;
 // thickness of rim to hold piece between pipe and fitting
 $basethick = .125;
+// pilot rim width
+$pilotrimwidth = .1;
+
+
 difference () {
   union () {
-    cylinder (h=$basethick, r= $fittingdia/2);
-    cylinder (h=$exten + $basethick, r=$pipedia/2);
+    cylinder (h=$basethick,
+              r= $fittingdia/2);
+    cylinder (h=$exten + $basethick,
+              r=$pipedia/2);
   }
   union () {
     translate ([0,0,$exten - $pilotdepth + $basethick])
-      cylinder (h=$pilotdepth, r1 = $centerholedia/2, r2 = $pipedia/2-.1);
-    cylinder (h=$basethick + $exten, r=$centerholedia/2);
+      cylinder (h=$pilotdepth,
+                r1 = $centerholedia/2,
+                r2 = $pipedia/2 - $pilotrimwidth);
+    cylinder (h=$basethick + $exten,
+              r=$centerholedia/2);
   }
 }
