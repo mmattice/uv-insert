@@ -1,11 +1,25 @@
-$fn=180;
+$fn=90;
+
+// Diameter of hole we're piloting for
+$centerholedia = 1;
+// Inner diameter of pipe we need the extension to fit inside of
+$pipedia = 2;
+// Inner diameter of fitting we need the base to fit inside of
+$fittingdia = 2.375;
+// Height of the pipe insert
+$exten = 1;
+// Height of angled part of pilot
+$pilotdepth = $exten - .25;
+// thickness of rim to hold piece between pipe and fitting
+$basethick = .125;
 difference () {
   union () {
-    cylinder (h=.125, r= 2.375/2, center=true);
-    translate ([0,0,.5]) cylinder (h=1, r=1, center=true);
+    cylinder (h=$basethick, r= $fittingdia/2);
+    cylinder (h=$exten + $basethick, r=$pipedia/2);
   }
   union () {
-    translate ([0,0,.75]) cylinder (h=.75, r1 = 7/16, r2 = .95, center=true);
-    cylinder (h=2, r=7/16, center=true);
+    translate ([0,0,$exten - $pilotdepth + $basethick])
+      cylinder (h=$pilotdepth, r1 = $centerholedia/2, r2 = $pipedia/2-.1);
+    cylinder (h=$basethick + $exten, r=$centerholedia/2);
   }
 }
