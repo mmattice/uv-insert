@@ -6,6 +6,8 @@ $centerholedia = 1;
 $nompipesize = 5; // [ 0: 1/2", 1: 3/4", 2: 1", 3: 1 1/4", 4: 1 1/2", 5: 2", 6: 2 1/2", 7: 3", 8: 4"]
 // Schedule of pipe
 $schedule = 3;  // [1: Schedule 10, 2: Normal, 3: Schedule 40, 4: Schedule 80]
+// Pipe fit tolerance in thousandths
+$pfittol = 20; // [0:40]
 // Height of the pipe insert
 $exten = 1;
 // Height of angled part of pilot
@@ -28,7 +30,7 @@ $pipedata =  [[ 0.840, 0.083, 0.109, 0.109, 0.147 ],
              ];
 
 $fittingdia = $pipedata[ $nompipesize ][ 0 ];
-$pipedia = $fittingdia - ( $pipedata[ $nompipesize ][ $schedule ] * 2 );
+$pipedia = $fittingdia - ( $pipedata[ $nompipesize ][ $schedule ] * 2 ) - 2 * ( $pfittol / 1000 );
 echo ("Fitting inner diameter: ", $fittingdia, "  Pipe inner diameter: ", $pipedia);
 
 scale ([25.4, 25.4, 25.4]) {
