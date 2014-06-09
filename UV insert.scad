@@ -16,19 +16,21 @@ $basethick = .125;
 $pilotrimwidth = .1;
 
 
-difference () {
-  union () {
-    cylinder (h=$basethick,
-              r= $fittingdia/2);
-    cylinder (h=$exten + $basethick,
-              r=$pipedia/2);
-  }
-  union () {
-    translate ([0,0,$exten - $pilotdepth + $basethick])
-      cylinder (h=$pilotdepth,
-                r1 = $centerholedia/2,
-                r2 = $pipedia/2 - $pilotrimwidth);
-    cylinder (h=$basethick + $exten,
-              r=$centerholedia/2);
+scale ([25.4, 25.4, 25.4]) {
+  difference () {
+    union () {
+      cylinder (h=$basethick,
+                r= $fittingdia/2);
+      cylinder (h=$exten + $basethick,
+                r=$pipedia/2);
+    }
+    union () {
+      translate ([0,0,$exten - $pilotdepth + $basethick])
+        cylinder (h=$pilotdepth,
+                  r1 = $centerholedia/2,
+                  r2 = $pipedia/2 - $pilotrimwidth);
+      cylinder (h=$basethick + $exten,
+                r=$centerholedia/2);
+    }
   }
 }
